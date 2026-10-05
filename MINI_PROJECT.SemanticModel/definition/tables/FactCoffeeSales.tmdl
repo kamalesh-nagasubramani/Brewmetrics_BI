@@ -52,6 +52,16 @@ table FactCoffeeSales
 		formatString: 0
 		lineageTag: 56b501ed-0a59-4c38-87ad-61908ee5033b
 
+	measure 'Average Sale' =
+			
+			DIVIDE(
+			    [Total Sales],
+			    DISTINCTCOUNT(FactCoffeeSales[sale_id])
+			)
+		lineageTag: 6babe585-2a6a-4946-9a75-ab5fed44ae69
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	column sale_id
 		dataType: int64
 		formatString: 0
