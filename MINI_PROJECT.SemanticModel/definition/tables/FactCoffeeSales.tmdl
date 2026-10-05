@@ -1,6 +1,13 @@
 table FactCoffeeSales
 	lineageTag: a2722342-865b-4791-afaa-40e2173c7b23
 
+	measure 'Total Sales' =
+			
+			SUM(FactCoffeeSales[sales_amount])
+		lineageTag: 60e36676-6237-41f8-9fae-641cb8777ce4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	column sale_id
 		dataType: int64
 		formatString: 0
