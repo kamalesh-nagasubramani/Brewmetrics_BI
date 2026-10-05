@@ -1,0 +1,56 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "d5ffbfff16f4912731e6",
+  "position": {
+    "x": 178.3673052153824,
+    "y": 50.244311328276737,
+    "z": 1000,
+    "height": 236.14826324290064,
+    "width": 163.2940118168994,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactCoffeeSales"
+                    }
+                  },
+                  "Property": "Average Sale"
+                }
+              },
+              "queryRef": "FactCoffeeSales.Average Sale",
+              "nativeQueryRef": "Average Sale"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "FactCoffeeSales"
+                  }
+                },
+                "Property": "Average Sale"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

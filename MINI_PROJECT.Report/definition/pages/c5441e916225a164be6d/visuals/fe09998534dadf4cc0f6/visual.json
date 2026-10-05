@@ -1,0 +1,56 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "fe09998534dadf4cc0f6",
+  "position": {
+    "x": 401.9544906262139,
+    "y": 50.244311328276737,
+    "z": 2000,
+    "height": 261.270418907039,
+    "width": 211.02610757876229,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactCoffeeSales"
+                    }
+                  },
+                  "Property": "Month-over-Month Sales Growth %"
+                }
+              },
+              "queryRef": "FactCoffeeSales.Month-over-Month Sales Growth %",
+              "nativeQueryRef": "Month-over-Month Sales Growth %"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "FactCoffeeSales"
+                  }
+                },
+                "Property": "Month-over-Month Sales Growth %"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
