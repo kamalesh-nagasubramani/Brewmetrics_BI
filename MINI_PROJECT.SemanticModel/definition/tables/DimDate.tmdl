@@ -1,0 +1,72 @@
+table DimDate
+	lineageTag: f8765ed9-5140-490a-84f0-2bf3de37e30d
+
+	column date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 8ed53d4b-9932-4c5c-a1f0-b31af0a1a8ad
+		summarizeBy: none
+		sourceColumn: date
+
+		variation Variation
+			isDefault
+			relationship: abd37ebf-fd02-48a7-8327-0798f39cbd74
+			defaultHierarchy: LocalDateTable_bc28be69-a483-4663-9517-28594ba2a1d2.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: ec5a6dfb-775b-4e6d-b5c5-b728d3a19b18
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: int64
+		formatString: 0
+		lineageTag: bccd3c94-f0cd-4d74-bc7a-14a69e8e594b
+		summarizeBy: sum
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Name'
+		dataType: string
+		lineageTag: a8810f52-5ec0-4c4e-aaab-3c3b4993f5cf
+		summarizeBy: none
+		sourceColumn: Month Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: 75c3c7b4-c879-49a2-821c-db24497d9be3
+		summarizeBy: sum
+		sourceColumn: Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimDate = m
+		mode: import
+		source =
+				let
+				    Source = FactCoffeeSales,
+				    #"Removed Other Columns" = Table.SelectColumns(Source,{"date"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns"),
+				    #"Inserted Year" = Table.AddColumn(#"Removed Duplicates", "Year", each Date.Year([date]), Int64.Type),
+				    #"Inserted Month" = Table.AddColumn(#"Inserted Year", "Month", each Date.Month([date]), Int64.Type),
+				    #"Inserted Month Name" = Table.AddColumn(#"Inserted Month", "Month Name", each Date.MonthName([date]), type text),
+				    #"Inserted Quarter" = Table.AddColumn(#"Inserted Month Name", "Quarter", each Date.QuarterOfYear([date]), Int64.Type)
+				in
+				    #"Inserted Quarter"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

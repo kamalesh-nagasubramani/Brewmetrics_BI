@@ -1,0 +1,74 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 568,
+            "y": 48
+          },
+          "nodeIndex": "DimDate",
+          "nodeLineageTag": "f8765ed9-5140-490a-84f0-2bf3de37e30d",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 334,
+            "y": 22
+          },
+          "nodeIndex": "DimProduct",
+          "nodeLineageTag": "705042f2-9a10-4a20-9c7f-4f4df43d226c",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 852,
+            "y": 72
+          },
+          "nodeIndex": "DimStore",
+          "nodeLineageTag": "6e9f3c2d-13c7-425a-90a3-f4d85e14df36",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": -50
+          },
+          "nodeIndex": "FactCoffeeSales",
+          "nodeLineageTag": "a2722342-865b-4791-afaa-40e2173c7b23",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 4
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

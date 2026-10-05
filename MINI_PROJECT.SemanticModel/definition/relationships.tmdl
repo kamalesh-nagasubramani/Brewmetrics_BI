@@ -1,0 +1,17 @@
+relationship abd37ebf-fd02-48a7-8327-0798f39cbd74
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DimDate.date
+	toColumn: LocalDateTable_bc28be69-a483-4663-9517-28594ba2a1d2.Date
+
+relationship AutoDetected_a7aab6aa-5e4d-4828-903c-2ccecc68782d
+	fromColumn: FactCoffeeSales.item
+	toColumn: DimProduct.item
+
+relationship 4300b882-662c-4ce4-4ada-49a020699836
+	fromColumn: FactCoffeeSales.date
+	toColumn: DimDate.date
+
+relationship ca689512-5747-2629-ec4d-7643fcbaf0b4
+	fromColumn: FactCoffeeSales.StoreKey
+	toColumn: DimStore.Storekey
+

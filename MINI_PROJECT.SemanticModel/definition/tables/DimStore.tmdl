@@ -1,0 +1,44 @@
+table DimStore
+	lineageTag: 6e9f3c2d-13c7-425a-90a3-f4d85e14df36
+
+	column city
+		dataType: string
+		lineageTag: dab109d8-12f8-4f82-a6c2-6c1dc39d6014
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column store_format
+		dataType: string
+		lineageTag: 928dcb6e-9ba3-4b0f-8879-752171bad3e2
+		summarizeBy: none
+		sourceColumn: store_format
+
+		annotation SummarizationSetBy = Automatic
+
+	column Storekey
+		dataType: int64
+		formatString: 0
+		lineageTag: eabbf9f2-a138-48bc-bf16-d9cad2b9166c
+		summarizeBy: none
+		sourceColumn: Storekey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimStore = m
+		mode: import
+		source =
+				let
+				    Source = FactCoffeeSales,
+				    #"Removed Columns" = Table.RemoveColumns(Source,{"sale_id", "date", "category", "item", "quantity", "unit_price", "sales_amount"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Columns"),
+				    #"Added Index" = Table.AddIndexColumn(#"Removed Duplicates", "Index", 1, 1, Int64.Type),
+				    #"Renamed Columns" = Table.RenameColumns(#"Added Index",{{"Index", "Storekey"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

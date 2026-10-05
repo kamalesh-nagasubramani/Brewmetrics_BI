@@ -1,0 +1,110 @@
+table FactCoffeeSales
+	lineageTag: a2722342-865b-4791-afaa-40e2173c7b23
+
+	column sale_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 19683aa8-7689-43f9-ba92-6f32570ee396
+		summarizeBy: sum
+		sourceColumn: sale_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a7fd27e5-8b3c-4b12-9186-5ae9bfd02f93
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column city
+		dataType: string
+		lineageTag: 5bcd32fe-7612-4ec8-94e5-f3d937b56132
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column store_format
+		dataType: string
+		lineageTag: d6bca752-35fb-4573-a487-6d51c580efbe
+		summarizeBy: none
+		sourceColumn: store_format
+
+		annotation SummarizationSetBy = Automatic
+
+	column category
+		dataType: string
+		lineageTag: a3d5b5aa-81d3-4a4c-a8fe-60e8114360e3
+		summarizeBy: none
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	column item
+		dataType: string
+		lineageTag: 7febf045-4b08-42f2-b692-5bfc19f3c074
+		summarizeBy: none
+		sourceColumn: item
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 0472f945-eca6-4c13-b1e4-7e62df7e8865
+		summarizeBy: sum
+		sourceColumn: quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit_price
+		dataType: int64
+		formatString: 0
+		lineageTag: 275217f1-266c-49b5-8ea0-b2bc43e230ae
+		summarizeBy: sum
+		sourceColumn: unit_price
+
+		annotation SummarizationSetBy = Automatic
+
+	column sales_amount
+		dataType: double
+		lineageTag: 8e5c733d-d4d1-4eeb-8ccb-b9aa9a78ed90
+		summarizeBy: sum
+		sourceColumn: sales_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column StoreKey =
+			
+			LOOKUPVALUE(
+			    DimStore[Storekey],
+			    DimStore[city], FactCoffeeSales[city],
+			    DimStore[store_format], FactCoffeeSales[store_format]
+			)
+		formatString: 0
+		lineageTag: ef43891b-6996-4a46-86ba-24e9d55b26a5
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FactCoffeeSales = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\Kaviya\Downloads\brewmetrics_sales.csv"),[Delimiter=",", Columns=9, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"sale_id", Int64.Type}, {"date", type date}, {"city", type text}, {"store_format", type text}, {"category", type text}, {"item", type text}, {"quantity", Int64.Type}, {"unit_price", Int64.Type}, {"sales_amount", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
