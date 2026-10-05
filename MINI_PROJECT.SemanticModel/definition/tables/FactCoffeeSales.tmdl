@@ -8,6 +8,16 @@ table FactCoffeeSales
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	measure 'Previous Month Sales' =
+			
+			CALCULATE(
+			    [Total Sales],
+			    DATEADD(DimDate[date], -1, MONTH)
+			)
+		lineageTag: c111b6ec-e08c-4456-bbc8-eb72f1a8ed0d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	column sale_id
 		dataType: int64
 		formatString: 0
